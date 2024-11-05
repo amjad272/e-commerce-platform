@@ -11,17 +11,26 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Seller\SellerProductController;
 use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellerMainController;
+use App\Http\Controllers\Customer\CustomerMainController;
+use App\Http\Controllers\MasterCategoryController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-// ***** //   Customer Routes   // ************** //
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'rolemanager:customer'])->name('dashboard');
+//  Customer Routes   // ************** //
+Route::middleware(['auth', 'verified', 'rolemanager:customer'])->group(function () {
+    Route::prefix('user')->group(function () {
+        Route::controller(CustomerMainController::class)->group(function () {
+            Route::get('/dashboard', 'index')->name('dashboard');
+            Route::get('/order/history', 'history')->name('customer.history');
+            Route::get('/setting/payment', 'payment')->name('customer.payment');
+            Route::get('/affiliate', 'affiliate')->name('customer.affiliate');
+        });
+    });
+});
 
-// ***** //   Admin Routes   // ************** //
+//  Admin Routes   // ************** //
 Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::controller(AdminMainController::class)->group(function () {
@@ -39,8 +48,8 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
         });
 
         Route::controller(SubCategoryController::class)->group(function () {
-            Route::get('/subcategory/create', 'index')->name('sub-category.create');
-            Route::get('/subcategory/manage', 'manage')->name('sub-category.manage');
+            Route::get('/sub-category/create', 'index')->name('sub-category.create');
+            Route::get('/sub-category/manage', 'manage')->name('sub-category.manage');
         });
 
         Route::controller(ProductController::class)->group(function () {
@@ -56,11 +65,17 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
         Route::controller(DiscountController::class)->group(function () {
             Route::get('/discount/create', 'index')->name('discount.create');
             Route::get('/discount/manage', 'manage')->name('discount.manage');
+
+        });
+
+        Route::controller(MasterCategoryController::class)->group(function () {
+            Route::post('/category/store', 'store')->name('storecat');
+            Route::get('/category/delete/{id}', 'destroy')->name('deletecat');
         });
     });
 });
 
-// ***** //   Vendor Routes   // ************** //
+//   Vendor Routes   // ************** //
 Route::middleware(['auth', 'verified', 'rolemanager:vendor'])->group(function () {
     Route::prefix('vendor')->group(function () {
         Route::controller(SellerMainController::class)->group(function () {
