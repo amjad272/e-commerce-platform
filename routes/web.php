@@ -69,9 +69,10 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
         });
 
         Route::controller(MasterCategoryController::class)->group(function () {
-            Route::post('/category/store', 'store')->name('storecat');
-            Route::get('/category/delete/{id}', 'destroy')->name('deletecat');
-            Route::get('/category/{id}', 'edit')->name('editcat');
+            Route::post('/category/store', 'store')->name('store.cat');
+            Route::delete('/category/delete/{id}', 'destroy')->name('delete.cat');
+            Route::get('/category/{id}', 'edit')->name('edit.cat');
+            Route::put('/category/update/{id}', 'update')->name('update.cat');
         });
     });
 });

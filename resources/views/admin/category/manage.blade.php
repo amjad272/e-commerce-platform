@@ -9,6 +9,11 @@
                 <div class="card-header">
                     <h4 class="card-title mb-0">All Categories</h4>
                 </div>
+                @if(session('message'))
+                    <div class="alert alert-success ms-3 me-3">
+                        {{session('message')}} <i class="align-middle" data-feather="check"></i>
+                    </div>
+                @endif
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table">
@@ -22,9 +27,15 @@
                             <tbody>
                             @foreach($categories as $category)
                                 <tr>
-                                <td>{{$category->id}}</td>
-                                <td>{{$category->category_name}}</td>
-                                <td><a href="{{route('deletecat',$category->id)}}" class="btn btn-danger">Delete</a> <a href="{{route('editcat',$category->id)}}" class="btn btn-primary">Edit</a></td>
+                                    <td>{{$category->id}}</td>
+                                    <td>{{$category->category_name}}</td>
+                                    <td><a href="{{route('edit.cat',$category->id)}}" class="btn btn-primary">Edit</a>
+                                        <form action="{{route('delete.cat',$category->id)}}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <input type="submit" value="Delete" class="btn btn-danger mt-1"></input>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

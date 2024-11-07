@@ -7,27 +7,45 @@ use Illuminate\Http\Request;
 
 class MasterCategoryController extends Controller
 {
+    //  *****  Store  *****
     public function store(Request $request)
     {
         $validate_data = $request->validate([
             'category_name' => 'unique:categories|max:100|min:2'
         ]);
         category::create($validate_data);
-        return redirect()->back()->with('success','Category Added Successfully');
+        return redirect()->back()->with('message', 'Category Added Successfully');
     }
 
-    public function destroy(category $category, $id)
+//  *****  Delete  *****
+    public function destroy($id)
     {
-        $isDeleted = $category->where("id", $id)->delete();
+        category::FindOrFail($id)->delete();
 
-        if ($isDeleted > 0) {
-            return redirect()->back();
-        }
+        return redirect()->back()->with('message', 'Category deleted Successfully');
     }
 
+//   ***** Edit  *****
     public function edit($id)
     {
         $edited = category::find($id);
         return view('admin.category.edit', compact('edited'));
+    }
+
+//   ***** Update  *****
+    public function update(Category $category ,Request $request, $id)
+    {
+//        accessing the category table in the database by the model
+        $category->FindOrFail($id);
+
+//        validate the data coming from the form
+        $validate_data = $request->validate([
+            'category_name' => 'unique:categories|max:100|min:2'
+        ]);
+
+//        update the category
+      $category->update($validate_data);
+
+      return redirect()->back()->with("message", "Category Updated Successfully");
     }
 }

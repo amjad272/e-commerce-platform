@@ -10,7 +10,7 @@
                     <h5 class="card-title mb-0">Create Category</h5>
                 </div>
                 @if ($errors->any())
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger ms-3 me-3">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -18,12 +18,12 @@
                         </ul>
                     </div>
                 @endif
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        Category Added Successfully <i class="align-middle" data-feather="check"></i>
+                @if(session('message'))
+                    <div class="alert alert-success ms-3 me-3">
+                        {{session('message')}} <i class="align-middle" data-feather="check"></i>
                     </div>
                 @endif
-                <form action="{{route('storecat')}}" method="post">
+                <form action="{{route('store.cat')}}" method="post">
                     @csrf
                     <div class="card-body">
                         <label for="category_name" class="fw-bold mb-2">Give A Name To Your New Category</label>
