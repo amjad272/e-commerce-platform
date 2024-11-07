@@ -16,7 +16,7 @@
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html"/>
 
     <title> @yield('admin_page_title') </title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('admin_assets/css/app.css')}}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
