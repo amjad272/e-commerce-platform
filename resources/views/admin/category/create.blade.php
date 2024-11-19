@@ -4,16 +4,16 @@
 @endsection
 @section('admin_layout')
     <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">Create Category</h5>
                 </div>
                 @if ($errors->any())
-                    <div class="alert alert-danger ms-3 me-3">
+                    <div class="alert alert-warning ms-3 me-3">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
+                                <li>{{ $error }} <i class="align-middle" data-feather="alert-circle"></i></li>
                             @endforeach
                         </ul>
                     </div>

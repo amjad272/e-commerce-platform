@@ -33,10 +33,10 @@ class MasterCategoryController extends Controller
     }
 
 //   ***** Update  *****
-    public function update(Category $category ,Request $request, $id)
+    public function update(Request $request, $id)
     {
 //        accessing the category table in the database by the model
-        $category->FindOrFail($id);
+        $category = category::FindOrFail($id);
 
 //        validate the data coming from the form
         $validate_data = $request->validate([

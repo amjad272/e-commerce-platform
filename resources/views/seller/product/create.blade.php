@@ -3,5 +3,5 @@
     Create Product - Seller Panel
 @endsection
 @section('seller_layout')
-    <h4>Create Product</h4>
+    <livewire:category-subcategory/>
 @endsection

@@ -14,6 +14,7 @@
     <link rel="shortcut icon" href="img/icons/icon-48x48.png"/>
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title> @yield('customer_page_title') </title>
 
@@ -246,7 +247,10 @@
                             <a class="dropdown-item" href="#"><i class="align-middle me-1"
                                                                  data-feather="help-circle"></i> Help Center</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <input type="submit" value="Logout" class="btn btn-warning ms-3"></input>
+                            </form>
                         </div>
                     </li>
                 </ul>

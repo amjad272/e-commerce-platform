@@ -14,18 +14,20 @@
     <link rel="shortcut icon" href="img/icons/icon-48x48.png"/>
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title> @yield('seller_page_title') </title>
 
     <link href="{{asset('admin_assets/css/app.css')}}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+{{--    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">--}}
+    @livewireStyles
 </head>
 
 <body>
 <div class="wrapper">
     <nav id="sidebar" class="sidebar js-sidebar">
         <div class="sidebar-content js-simplebar">
-            <a class="sidebar-brand" href="{{route('seller')}}">
+            <a class="sidebar-brand" href="{{route('vendor')}}">
                 <span class="align-middle">Seller Dashboard</span>
             </a>
 
@@ -35,7 +37,7 @@
                 </li>
 
                 <li class="sidebar-item {{request()->routeIs('seller') ? 'active': ''}}">
-                    <a class="sidebar-link" href="{{route('seller')}}">
+                    <a class="sidebar-link" href="{{route('vendor')}}">
                         <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                     </a>
                 </li>
@@ -43,6 +45,23 @@
                 <li class="sidebar-item {{request()->routeIs('seller.order-history') ? 'active': ''}}">
                     <a class="sidebar-link" href="{{route('seller.order-history')}}">
                         <i class="align-middle" data-feather="list"></i> <span class="align-middle">Order History</span>
+                    </a>
+                </li>
+
+
+                <li class="sidebar-header">
+                    Store
+                </li>
+
+                <li class="sidebar-item {{request()->routeIs('seller.store.create') ? 'active': ''}}">
+                    <a class="sidebar-link" href="{{route('seller.store.create')}}">
+                        <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Create</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item {{request()->routeIs('seller.store.manage') ? 'active': ''}}">
+                    <a class="sidebar-link" href="{{route('seller.store.manage')}}">
+                        <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage</span>
                     </a>
                 </li>
 
@@ -62,21 +81,6 @@
                     </a>
                 </li>
 
-                <li class="sidebar-header">
-                    Store
-                </li>
-
-                <li class="sidebar-item {{request()->routeIs('seller.store.create') ? 'active': ''}}">
-                    <a class="sidebar-link" href="{{route('seller.store.create')}}">
-                        <i class="align-middle" data-feather="plus"></i> <span class="align-middle">Create</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item {{request()->routeIs('seller.store.manage') ? 'active': ''}}">
-                    <a class="sidebar-link" href="{{route('seller.store.manage')}}">
-                        <i class="align-middle" data-feather="list"></i> <span class="align-middle">Manage</span>
-                    </a>
-                </li>
             </ul>
 
             <div class="sidebar-cta">
@@ -269,7 +273,10 @@
                             <a class="dropdown-item" href="#"><i class="align-middle me-1"
                                                                  data-feather="help-circle"></i> Help Center</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Log out</a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <input type="submit" value="Logout" class="btn btn-warning ms-3"></input>
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -317,6 +324,7 @@
 </div>
 
 <script src="{{asset('admin_assets/js/app.js')}}"></script>
+@livewireScripts
 
 </body>
 

@@ -4,7 +4,7 @@
 @endsection
 @section('admin_layout')
     <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title mb-0">All Categories</h4>

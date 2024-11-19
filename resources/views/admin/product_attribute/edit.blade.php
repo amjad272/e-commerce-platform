@@ -1,13 +1,13 @@
 @extends('admin.layouts.layout')
 @section('admin_page_title')
-    Edit Category - Admin Panel
+    Edit Attribute - Admin Panel
 @endsection
 @section('admin_layout')
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Edit Category</h5>
+                    <h5 class="card-title mb-0">Edit Attribute</h5>
                 </div>
                 @if ($errors->any())
                     <div class="alert alert-warning">
@@ -23,14 +23,14 @@
                         {{session('message')}} <i class="align-middle" data-feather="check"></i>
                     </div>
                 @endif
-                <form action="{{route('update.cat',$edited->id)}}" method="post" class="mt-0">
+                <form action="{{route('update.attribute',$edited->id)}}" method="post" class="mt-0">
                     @csrf
                     @method('put')
                     <div class="card-body">
-                        <label for="category_name" class="fw-bold mb-2">Give A Name To Your New Category</label>
-                        <input type="text" class="form-control mb-2" name="category_name"
-                               value="{{$edited->category_name}}">
-                        <button type="submit" class="btn btn-primary w-100">Update Category</button>
+                        <label for="attribute_value" class="fw-bold mb-2">Give A Name To Your New Attribute</label>
+                        <input type="text" class="form-control mb-2" name="attribute_value"
+                               value="{{$edited->attribute_value}}">
+                        <button type="submit" class="btn btn-primary w-100">Update Attribute</button>
                     </div>
                 </form>
             </div>

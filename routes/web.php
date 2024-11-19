@@ -13,6 +13,7 @@ use App\Http\Controllers\Seller\SellerStoreController;
 use App\Http\Controllers\Seller\SellerMainController;
 use App\Http\Controllers\Customer\CustomerMainController;
 use App\Http\Controllers\MasterCategoryController;
+use App\Http\Controllers\MasterSubcategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -60,6 +61,10 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
         Route::controller(ProductAttributeController::class)->group(function () {
             Route::get('/product-attribute/create', 'index')->name('product-attribute.create');
             Route::get('/product-attribute/manage', 'manage')->name('product-attribute.manage');
+            Route::post('/product-attribute/store', 'storeattribute')->name('store.attribute');
+            Route::delete('/attribute/delete/{id}', 'destroy')->name('delete.attribute');
+            Route::get('/attribute/edit/{id}', 'edit')->name('edit.attribute');
+            Route::put('/attribute/update/{id}', 'update')->name('update.attribute');
         });
 
         Route::controller(DiscountController::class)->group(function () {
@@ -74,6 +79,12 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
             Route::get('/category/{id}', 'edit')->name('edit.cat');
             Route::put('/category/update/{id}', 'update')->name('update.cat');
         });
+        Route::controller(MasterSubcategoryController::class)->group(function () {
+            Route::post('/subcategory/store', 'storesubcat')->name('store.subcat');
+            Route::delete('/subcategory/delete/{id}', 'destroy')->name('delete.subcat');
+            Route::get('/subcategory/edit/{id}', 'edit')->name('edit.subcat');
+            Route::put('/subcategory/update/{id}', 'update')->name('update.subcat');
+        });
     });
 });
 
@@ -81,7 +92,7 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
 Route::middleware(['auth', 'verified', 'rolemanager:vendor'])->group(function () {
     Route::prefix('vendor')->group(function () {
         Route::controller(SellerMainController::class)->group(function () {
-            Route::get('/dashboard', 'index')->name('seller');
+            Route::get('/dashboard', 'index')->name('vendor');
             Route::get('/order-history', 'order_history')->name('seller.order-history');
         });
 
@@ -93,6 +104,10 @@ Route::middleware(['auth', 'verified', 'rolemanager:vendor'])->group(function ()
         Route::controller(SellerStoreController::class)->group(function () {
             Route::get('/store/create', 'index')->name('seller.store.create');
             Route::get('/store/manage', 'manage')->name('seller.store.manage');
+            Route::post('/store/publish', 'store')->name('seller.store.publish');
+            Route::get('/store/edit/{id}', 'edit')->name('edit.store');
+            Route::put('/store/update/{id}', 'update')->name('update.store');
+            Route::delete('/store/delete/{id}', 'destroy')->name('delete.store');
         });
     });
 });
