@@ -19,7 +19,7 @@
     <title> @yield('seller_page_title') </title>
 
     <link href="{{asset('admin_assets/css/app.css')}}" rel="stylesheet">
-{{--    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">--}}
+    {{--    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">--}}
     @livewireStyles
 </head>
 
@@ -286,7 +286,7 @@
         <main class="content">
             <div class="container-fluid p-0">
 
-            @yield('seller_layout')
+                @yield('seller_layout')
 
             </div>
         </main>
