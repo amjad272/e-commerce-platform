@@ -27,7 +27,7 @@ class SellerProductController extends Controller
 
     public function store(Request $request)
     {
-        $validate = $request->validate([
+        $request->validate([
             'product_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'sku' => 'required|unique:products,sku',
@@ -71,6 +71,39 @@ class SellerProductController extends Controller
                 ]);
             }
         return redirect()->back()->with("message", "Product Added Successfully");
+
+    }
+
+    public function edit($id)
+    {
+        $product = Product::FindOrFail($id);
+
+        return view('seller.product.edit', compact('product'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $product = Product::FindOrFail($id);
+
+        $validate = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'sku' => 'required|unique:products,sku',
+            'regular_price' => 'required|numeric|min:0',
+            'discounted_price' => 'nullable|numeric|min:0',
+            'tax_rate' => 'required|numeric|max:100',
+            'stock_quantity' => 'required|integer|min:0'
+        ]);
+
+        $product->update($validate);
+
+        return redirect()->back()->with("message", "Product Updated Successfully");
+    }
+
+    public function destroy($id)
+    {
+        Product::FindOrFail($id)->delete();
+
+        return redirect()->back()->with("message", "Product Removed Successfully");
 
     }
 }

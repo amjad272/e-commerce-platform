@@ -14,13 +14,15 @@ class MasterCategoryController extends Controller
             'category_name' => 'unique:categories|max:100|min:2'
         ]);
         category::create($validate_data);
-        return redirect()->back()->with('message', 'Category Added Successfully');
+        return redirect()->back()->with('message', "Category Added Successfully");
     }
 
 //  *****  Delete  *****
     public function destroy($id)
     {
-        category::FindOrFail($id)->delete();
+        $category = category::FindOrFail($id);
+
+        $category->delete();
 
         return redirect()->back()->with('message', 'Category deleted Successfully');
     }
@@ -44,8 +46,8 @@ class MasterCategoryController extends Controller
         ]);
 
 //        update the category
-      $category->update($validate_data);
+        $category->update($validate_data);
 
-      return redirect()->back()->with("message", "Category Updated Successfully");
+        return redirect()->back()->with("message", "Category Updated Successfully");
     }
 }

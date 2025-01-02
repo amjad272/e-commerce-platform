@@ -14,9 +14,10 @@ use App\Http\Controllers\Seller\SellerMainController;
 use App\Http\Controllers\Customer\CustomerMainController;
 use App\Http\Controllers\MasterCategoryController;
 use App\Http\Controllers\MasterSubcategoryController;
+use App\Http\Controllers\HomePageController;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(HomePageController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
 });
 
 //  Customer Routes   // ************** //
@@ -38,6 +39,7 @@ Route::middleware(['auth', 'verified', 'rolemanager:admin'])->group(function () 
             Route::get('/dashboard', 'index')->name('admin');
             Route::get('/settings', 'setting')->name('admin.settings');
             Route::get('/manage/users', 'manage_user')->name('admin.manage.user');
+            Route::put('/homepagesetting/update', 'homePageSetting')->name('admin.homepagesetting.update');
             Route::get('/manage/store', 'manage_store')->name('admin.manage.store');
             Route::get('/cart/history', 'cart_history')->name('admin.cart.history');
             Route::get('/order/history', 'order_history')->name('admin.order.history');
@@ -100,6 +102,9 @@ Route::middleware(['auth', 'verified', 'rolemanager:vendor'])->group(function ()
             Route::get('/product/create', 'index')->name('seller.product.create');
             Route::get('/product/manage', 'manage')->name('seller.product.manage');
             Route::post('/product/store', 'store')->name('seller.product.store');
+            Route::get('/product/edit/{id}', 'edit')->name('edit.product');
+            Route::put('/product/update/{id}', 'update')->name('update.product');
+            Route::delete('/product/delete/{id}', 'destroy')->name('delete.product');
         });
 
         Route::controller(SellerStoreController::class)->group(function () {

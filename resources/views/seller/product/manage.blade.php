@@ -33,8 +33,9 @@
                                     <td>{{$product->product_name}}</td>
                                     <td>{{$product->regular_price}}</td>
                                     <td>{{$product->sku}}</td>
-                                    <td><a href="" class="btn btn-primary">Edit</a>
-                                        <form action="" method="post">
+                                    <td><a href="{{route('edit.product',$product->id)}}"
+                                           class="btn btn-primary">Edit</a>
+                                        <form action="{{route('delete.product',$product->id)}}" method="post">
                                             @csrf
                                             @method('delete')
                                             <input type="submit" value="Delete" class="btn btn-danger mt-1">

@@ -45,7 +45,7 @@ class SellerStoreController extends Controller
 
     public function update(Request $request, $id)
     {
-//        accessing the category table in the database by the model
+//        accessing the table in the database by the model
         $store = Store::FindOrFail($id);
 
 //        validate the data coming from the form
@@ -55,7 +55,7 @@ class SellerStoreController extends Controller
             'slug' => 'unique:stores|max:50|min:2'
         ]);
 
-//        update the category
+//        update
         $store->update($validate_data);
 
         return redirect()->back()->with("message", "Store Updated Successfully");
