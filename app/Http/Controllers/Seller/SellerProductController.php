@@ -42,7 +42,6 @@ class SellerProductController extends Controller
             'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-
         $product = Product::create([
             'product_name' => $request->product_name,
             'description' => $request->description,
@@ -55,7 +54,6 @@ class SellerProductController extends Controller
             'tax_rate' => $request->tax_rate,
             'stock_quantity' => $request->stock_quantity,
             'slug' => $request->slug,
-            'images.*' => $request->images,
             'seller_id' => Auth::id(),
             'meta_title' => $request->meta_title,
             'meta_description' => $request->meta_description

@@ -39,6 +39,7 @@
                         <label for="sku" class="fw-bold mb-2">SKU</label>
                         <input type="text" class="form-control mb-2" name="sku" placeholder="XUOM2378">
 
+
                         <livewire:category-subcategory/>
 
                         <label for="store_id" class="fw-bold mb-2">Select Store</label>
@@ -77,4 +78,3 @@
         </div>
     </div>
 @endsection
-

@@ -334,7 +334,7 @@
                             <div class="dropdown-divider"></div>
                             <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                                <input type="submit" value="Logout" class="btn btn-warning ms-3"></input>
+                                <input type="submit" value="Logout" class="btn btn-primary ms-3">
                             </form>
                         </div>
                     </li>
