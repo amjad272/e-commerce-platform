@@ -8,7 +8,6 @@
                         <h2>{{$homepagesetting->discount_percent}}%</h2>
                         <h4>{{$homepagesetting->discount_heading}}</h4>
                         <p>{{$homepagesetting->discount_subheading}}</p>
-
                         <div class="float-item">
                             <img src="{{asset('storage/' . $homepagesetting->discountedProduct->image->image_path)}}" alt="failed">
                         </div>
