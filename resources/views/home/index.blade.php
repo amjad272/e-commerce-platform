@@ -8,8 +8,15 @@
                         <h2>{{$homepagesetting->discount_percent}}%</h2>
                         <h4>{{$homepagesetting->discount_heading}}</h4>
                         <p>{{$homepagesetting->discount_subheading}}</p>
+                        @php
+                            $image1 = App\Models\ProductImage::where('product_id',$homepagesetting->discountedProduct->id)->get();
+                        @endphp
                         <div class="float-item">
-                            <img src="{{asset('storage/' . $homepagesetting->discountedProduct->image->image_path)}}" alt="failed">
+                            @foreach($image1 as $item)
+                                @if($item->product_id == $homepagesetting->discountedProduct->id)
+                                    <img src="{{asset('storage/' . $item->image_path)}}" alt="failed">
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -17,8 +24,15 @@
                 <div class="col-lg-5">
                     <div class="card-sm purple mb-3">
                         <!-- product image -->
+                        @php
+                            $image2 = App\Models\ProductImage::where('product_id',$homepagesetting->featuredProduct1->id)->get();
+                        @endphp
                         <div class="product">
-                            <img src="{{asset('storage/' . $homepagesetting->featuredProduct1->image->image_path)}}" alt="failed">
+                            @foreach($image2 as $item)
+                                @if($item->product_id == $homepagesetting->featuredProduct1->id)
+                                    <img src="{{asset('storage/' . $item->image_path)}}" alt="failed">
+                                @endif
+                            @endforeach
                         </div>
 
                         <div>
@@ -34,8 +48,15 @@
                         </div>
 
                         <!-- product image -->
+                        @php
+                            $image3 = App\Models\ProductImage::where('product_id',$homepagesetting->featuredProduct2->id)->get();
+                        @endphp
                         <div class="product">
-                            <img src="{{asset('storage/' . $homepagesetting->featuredProduct2->image->image_path)}}" alt="failed">
+                            @foreach($image3 as $item)
+                                @if($item->product_id == $homepagesetting->featuredProduct2->id)
+                                    <img src="{{asset('storage/' . $item->image_path)}}" alt="failed">
+                                @endif
+                            @endforeach
                         </div>
                     </div>
                 </div>
